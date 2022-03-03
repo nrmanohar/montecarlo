@@ -1,5 +1,7 @@
 """Provide the primary functions."""
 
+import numpy as np
+import matplotlib.pyplot as plt
 
 def canvas(with_attribution=True):
     """
@@ -100,28 +102,21 @@ class spin_config_1D:
         self.k = boltz
     def mu(self,m):
         self.mu = m
-    def report(self):
-        print("States:",self.states)
-        print()
-        print("Energies:",self.energies)
-        print()
-        print("Magnetizations:",self.magnetizations)
-        print()
-        print("Probabilities:",self.probabilities)
-        print()
-        print("Average Energy:",self.avg_eng)
-        print()
-        print("Average Magnetization:",self.avg_mag)
-        print()
-        print("Heat Capacity:",self.heat_capacity)
-        print()
-        print("Magnetic Susceptibility:",self.mag_sus)
-        print()
-        print("Constants-")
-        print("\tBoltzmann Constant is: ",self.k)
-        print("\tJ is: ",self.j)
-        print("\tmu is: ",self.mu)
-        print("\tTemperature is: ",self.T)
+    def __repr__(self):
+        string = "States: "+str(self.states)+'\n'
+        string+="Energies: "+str(self.energies)+'\n'
+        string+="Magnetizations: "+str(self.magnetizations)+'\n'
+        string+="Probabilities: "+str(self.probabilities)+'\n'
+        string+="Average Energy: "+str(self.avg_eng)+'\n'
+        string+="Average Magnetization: "+str(self.avg_mag)+'\n'
+        string+="Heat Capcity: "+str(self.heat_capacity)+'\n'
+        string+="Magnetic Susceptibility: "+str(self.heat_capacity)+'\n'
+        string+="Constants\n"
+        string+="\tBoltzmann Constant is: "+str(self.k)+'\n'
+        string+="\tJ is: "+str(self.j)+'\n'
+        string+="\tmu is: "+str(self.mu)+'\n'
+        string+="\tTemperature is: "+str(self.T)
+        return string
         
     def constants(self,boltz,pref,mu,temp):
         self.k = boltz
