@@ -4,19 +4,43 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class Hamiltonian:
+    '''
+    This is a simple class to calculate the hamiltonian for a spin configuration
+
+    :param J: The ferromagnetic constant for the material, defaults to -2
+    :type J: int, optional
+    :param mu: magnetic constant for energy calcualation, defaults to 1.1
+    :type mu: int, optional
+    :param k = The Boltzmann constant, defaults to 1
+    :type k = float, optional
+    :param state: The state that is being analyzed, defaults to []
+    :type state: list, optional 
+    '''
     def __init__(self,J = -2,mu=1.1,k=1,state=[]):
+        """Constructor method
+        """
         self.energy = 0
         self.state = state
         self.j = J
         self.mu = mu
         self.k = k
     def initialize(self,list):
+        """Initializes itself using a list
+
+        :param list: A list of spin orientations
+        :type list: list
+        """
         for i in list:
             self.state.append(i)
     def reset(self):
+        """Resets the object to default settings
+        """
         self.state.clear()
         self.energy = 0
     def spin_energy(self):
+        """Calculates the spin energy
+        :rtype float 
+        """
         for i in range(len(self.state)-1):
             self.energy+=(self.state[i]*self.state[i+1])
         self.energy+=self.state[0]*self.state[-1]
