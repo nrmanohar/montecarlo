@@ -2,6 +2,9 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+plt.clf()
+plt.cla()
+plt.close()
 
 class Hamiltonian:
     '''
@@ -212,7 +215,7 @@ class spin_config_1D:
         for i in range(int(tmin),int(tmax/step)):
             temps.append(i*step)
             self.temp(i*step)
-            self.generate_state(num_states)
+            self.calc(num_states)
             average_energy.append(self.avg_eng)
             average_magnetization.append(self.avg_mag)
             heat_cap.append(self.heat_capacity)
@@ -220,6 +223,10 @@ class spin_config_1D:
         plt.plot(temps,average_energy,'r-',temps,average_magnetization,'b-',temps,heat_cap,'g-',temps,mag_sus,'y-')
         plt.legend(["Average Energy", "Average Magnetization", "Heat Capacity", "Magnetic Susceptibility"],loc='best')
         plt.xlabel("Temperature (K)")
+        plt.show()
+        plt.clf()
+        plt.cla()
+        plt.close()
         self.T = t_current
 
 if __name__ == "__main__":
