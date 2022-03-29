@@ -5,3 +5,13 @@ API Documentation
    :toctree: autosummary
 
    montecarlo.hamiltonian
+
+.. currentmodule:: montecarlo 
+
+.. autoclass:: Hamiltonian 
+   :members:
+
+.. autofunction:: magnetization
+
+.. autoclass:: spin_config_1D
+   :members: 
