@@ -55,13 +55,6 @@ jobs:
         python -m pip install .
 
 
-    - name: Run tests
-
-      shell: bash
-
-      run: |
-        pytest -v --cov=montecarlo --cov-report=xml --color=yes montecarlo/tests/
-
     - name: CodeCov
       uses: codecov/codecov-action@v1
       with:
