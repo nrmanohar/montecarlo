@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>montecarlo.hamiltonian &mdash; montecarlo  documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> montecarlo
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About this package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">montecarlo</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>montecarlo.hamiltonian</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for montecarlo.hamiltonian</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Provide the primary functions.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="viewcode-block" id="Hamiltonian"><a class="viewcode-back" href="../../api.html#montecarlo.Hamiltonian">[docs]</a><span class="k">class</span> <span class="nc">Hamiltonian</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This is a simple class to calculate the hamiltonian for a spin configuration</span>
+
+<span class="sd">    :param J: The ferromagnetic constant for the material, defaults to -2</span>
+<span class="sd">    :type J: int, optional</span>
+
+<span class="sd">    :param mu: magnetic constant for energy calcualation, defaults to 1.1</span>
+<span class="sd">    :type mu: int, optional</span>
+
+<span class="sd">    :param k: The Boltzmann constant, defaults to 1</span>
+<span class="sd">    :type k: float, optional</span>
+<span class="sd">    </span>
+<span class="sd">    :param state: The state that is being analyzed, defaults to [1,-1,1,-1]</span>
+<span class="sd">    :type state: list, optional </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">J</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">state</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor method</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">J</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+<div class="viewcode-block" id="Hamiltonian.initialize"><a class="viewcode-back" href="../../api.html#montecarlo.Hamiltonian.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializes itself using a list. Note, all lists should be in the format of a sequential list where 1 is spin up and -1 is spin down</span>
+
+<span class="sd">        :param list: A list of spin orientations</span>
+<span class="sd">        :type list: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span></div>
+<div class="viewcode-block" id="Hamiltonian.reset"><a class="viewcode-back" href="../../api.html#montecarlo.Hamiltonian.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resets the object to default settings</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mi">0</span></div>
+<div class="viewcode-block" id="Hamiltonian.spin_energy"><a class="viewcode-back" href="../../api.html#montecarlo.Hamiltonian.spin_energy">[docs]</a>    <span class="k">def</span> <span class="nf">spin_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculates the spin energy using the Ising model</span>
+
+<span class="sd">        :rtype: float </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="o">+=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="o">*=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span>
+    
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="o">+=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>    
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span></div></div>
+
+<div class="viewcode-block" id="magnetization"><a class="viewcode-back" href="../../api.html#montecarlo.magnetization">[docs]</a><span class="k">def</span> <span class="nf">magnetization</span><span class="p">(</span><span class="n">spin_config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the magnetization alone of some spin configuration. Note, all lists should be in the format of a sequential list where 1 is spin up and -1 is spin down</span>
+
+<span class="sd">    :param spin_config: A list of spin orientations</span>
+<span class="sd">    :type list: list</span>
+<span class="sd">    :return: The computed magnetization for a spin configuration of listed spin states</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">magnet</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">spin_config</span><span class="p">:</span>
+        <span class="n">magnet</span><span class="o">+=</span><span class="n">i</span>
+    <span class="k">return</span> <span class="n">magnet</span></div>
+
+<div class="viewcode-block" id="spin_config_1D"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D">[docs]</a><span class="k">class</span> <span class="nc">spin_config_1D</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This is a simple class to calculate the energy distribution for all configurations of size n</span>
+
+<span class="sd">    :param boltz: The boltzmann constant for your calculations, defaults to 1</span>
+<span class="sd">    :type boltz: int or float</span>
+
+<span class="sd">    :param J: The ferromagnetic constant for your calculations, defaults to -2</span>
+<span class="sd">    :type J: int or float</span>
+
+<span class="sd">    :param mu: The magnetization constant for your calculations, defaults to 1.1</span>
+<span class="sd">    :type mu: int or float</span>
+
+<span class="sd">    :param temp: The temperature your spin lattice is held in (in kelvin), defaults to 373K (100 degrees Celsius)</span>
+<span class="sd">    :type temp: int or float</span>
+
+<span class="sd">    :param n: The size of lattice you&#39;re testing</span>
+<span class="sd">    :type n: int</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">boltz</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">J</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span><span class="n">temp</span><span class="o">=</span><span class="mi">373</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boltzmann</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">boltz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">J</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">temp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_eng</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_mag</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mag_sus</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<div class="viewcode-block" id="spin_config_1D.calc"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.calc">[docs]</a>    <span class="k">def</span> <span class="nf">calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculates the energies for all configurations of size n and puts them in an array, along with average energy, average magnetization, heat capacity, and magnetic susceptibility, along with the probabilities, and all the states</span>
+
+<span class="sd">        :param n: The number of sites on the spin configurations that you want to test</span>
+<span class="sd">        :type n: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate_state</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="c1">#Generates the states</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy_generation</span><span class="p">()</span>       
+        <span class="c1">#Generates the energies of each state    </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">magnetic_generation</span><span class="p">()</span>
+        <span class="c1">#Generates the magnetizations of each state    </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boltzmann_distribution</span><span class="p">()</span>
+        <span class="c1">#Generates the boltzmann distribution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">probabilities_generation</span><span class="p">()</span>
+        <span class="c1">#Generates the probabiliites, now normalized</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">averages</span><span class="p">()</span>
+        <span class="c1">#Computes average energy and magnetization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity_calculator</span><span class="p">()</span>
+        <span class="c1">#Computes heat capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">magnetic_sus_calculator</span><span class="p">()</span></div>
+        <span class="c1">#Computes magnetic suscpetibility        </span>
+<div class="viewcode-block" id="spin_config_1D.reset"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resets the configuration to all default values and default constants</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boltzmann</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="mf">1.1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="mi">323</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_eng</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_mag</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mag_sus</span> <span class="o">=</span> <span class="mi">0</span></div>
+<div class="viewcode-block" id="spin_config_1D.clean"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.clean">[docs]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resets the configuration to all default values but maintains the constants</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boltzmann</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_eng</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_mag</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mag_sus</span> <span class="o">=</span> <span class="mi">0</span></div>
+<div class="viewcode-block" id="spin_config_1D.temp"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.temp">[docs]</a>    <span class="k">def</span> <span class="nf">temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">temp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Modifies the temperature alone</span>
+<span class="sd">        </span>
+<span class="sd">        :param temp: The temperature you want to set your state at</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">temp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+<div class="viewcode-block" id="spin_config_1D.J"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.J">[docs]</a>    <span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pref</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Modifies the ferromagnetic preference alone</span>
+<span class="sd">        </span>
+<span class="sd">        :param pref: The J value do you want to set your state at</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">pref</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+<div class="viewcode-block" id="spin_config_1D.boltz"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.boltz">[docs]</a>    <span class="k">def</span> <span class="nf">boltz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Modifies the boltzmann constant alone</span>
+<span class="sd">        </span>
+<span class="sd">        :param k: The k value do you want to set your state at</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">boltz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+<div class="viewcode-block" id="spin_config_1D.mu"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.mu">[docs]</a>    <span class="k">def</span> <span class="nf">mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Modifies the magnetic preference alone</span>
+<span class="sd">        </span>
+<span class="sd">        :param mu: The mu value do you want to set your state at</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;States: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Energies: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Magnetizations: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Probabilities: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Average Energy: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avg_eng</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Average Magnetization: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avg_mag</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Heat Capcity: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Magnetic Susceptibility: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Constants</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Boltzmann Constant is: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">J is: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">mu is: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Temperature is: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">string</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;States: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Energies: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Magnetizations: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Probabilities: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Average Energy: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avg_eng</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Average Magnetization: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avg_mag</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Heat Capcity: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Magnetic Susceptibility: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;Constants</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Boltzmann Constant is: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">J is: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">mu is: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span><span class="o">+=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Temperature is: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">string</span>
+        
+<div class="viewcode-block" id="spin_config_1D.constants"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.constants">[docs]</a>    <span class="k">def</span> <span class="nf">constants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">boltz</span><span class="p">,</span><span class="n">pref</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">temp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Modifies the all the constants together</span>
+<span class="sd">        </span>
+<span class="sd">        :param boltz: Set your boltzmann constant at</span>
+<span class="sd">        :param pref: Set your ferromagnetic preferentiabiility</span>
+<span class="sd">        :param mu: Set your magnetic constant</span>
+<span class="sd">        :param temp: Set your temperature </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">boltz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">pref</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">temp</span></div>
+<div class="viewcode-block" id="spin_config_1D.energy_generation"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.energy_generation">[docs]</a>    <span class="k">def</span> <span class="nf">energy_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Takes all states and calculates the energy in each states and stores it in a list</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">:</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">energy</span><span class="o">+=</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">j</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">energy</span><span class="o">+=</span><span class="n">j</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">energy</span> <span class="o">*=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">energy</span><span class="o">+=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="o">*</span><span class="n">k</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span></div>
+<div class="viewcode-block" id="spin_config_1D.magnetic_generation"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.magnetic_generation">[docs]</a>    <span class="k">def</span> <span class="nf">magnetic_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Takes all states and calculates the magentization and stores it in a list</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">:</span>
+            <span class="n">magnet</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">magnet</span><span class="o">+=</span><span class="n">i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">magnet</span><span class="p">)</span></div>
+<div class="viewcode-block" id="spin_config_1D.boltzmann_distribution"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.boltzmann_distribution">[docs]</a>    <span class="k">def</span> <span class="nf">boltzmann_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculates the unnormalized probability distribution using each state&#39;s energy</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boltzmann</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)))</span></div>
+<div class="viewcode-block" id="spin_config_1D.probabilities_generation"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.probabilities_generation">[docs]</a>    <span class="k">def</span> <span class="nf">probabilities_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Takes the boltzmann distribution and normalizes it</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">norm</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boltzmann</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boltzmann</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boltzmann</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">norm</span><span class="p">)</span></div>
+<div class="viewcode-block" id="spin_config_1D.averages"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.averages">[docs]</a>    <span class="k">def</span> <span class="nf">averages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes weighted average energy and magnetization using the energy and probabilities list</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">avg_eng</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">avg_mag</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></div>
+<div class="viewcode-block" id="spin_config_1D.heat_capacity_calculator"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.heat_capacity_calculator">[docs]</a>    <span class="k">def</span> <span class="nf">heat_capacity_calculator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculates the heat capacity using the calculation based on the energies</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">copy_energy</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="mi">0</span>     
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">:</span>
+            <span class="n">copy_energy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">copy_energy</span><span class="p">)):</span>
+            <span class="n">E</span><span class="o">+=</span><span class="n">copy_energy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avg_eng</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> </div>
+<div class="viewcode-block" id="spin_config_1D.magnetic_sus_calculator"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.magnetic_sus_calculator">[docs]</a>    <span class="k">def</span> <span class="nf">magnetic_sus_calculator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculates the magnetic susceptibility using the calculation based on the energies</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">copy_mag</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span><span class="p">)):</span>
+            <span class="n">copy_mag</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">magnetizations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">copy_mag</span><span class="p">)):</span>
+            <span class="n">M</span><span class="o">+=</span><span class="n">copy_mag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mag_sus</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avg_mag</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
+<div class="viewcode-block" id="spin_config_1D.generate_state"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.generate_state">[docs]</a>    <span class="k">def</span> <span class="nf">generate_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generates every possible lattice state for n lattice sites</span>
+
+<span class="sd">        :param n: Size of the lattice</span>
+<span class="sd">        :type n: int        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">binary</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">char</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">binary</span><span class="p">]</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="p">)):</span>
+                <span class="n">state</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="n">state</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="o">&lt;</span><span class="n">n</span><span class="p">:</span>
+                <span class="n">state</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></div>
+<div class="viewcode-block" id="spin_config_1D.generate_plot"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.generate_plot">[docs]</a>    <span class="k">def</span> <span class="nf">generate_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">tmax</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">J</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_states</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates the plot for average energy, average magnetizatoin, heat capacity, and magnetic susceptibility over various temperatures.</span>
+
+<span class="sd">        :param tmin: minimum temperature, defaults to 1K</span>
+<span class="sd">        :type tmin: float</span>
+<span class="sd">        :param tmax: max temperature, defaults to 10K</span>
+<span class="sd">        :type tmax: float</span>
+<span class="sd">        :param step: Every interval over which a datapoint is measured, defaults to a step of 0.1</span>
+<span class="sd">        :type step: float</span>
+<span class="sd">        :param J: Ferromagnetic constant, defaults to -2</span>
+<span class="sd">        :type J: int or float</span>
+<span class="sd">        :param mu: Magnetization constant, defaults to 1.1</span>
+<span class="sd">        :type mu: int or float</span>
+<span class="sd">        :param k: Boltzmann constant</span>
+<span class="sd">        :type k: int or float</span>
+<span class="sd">        :param num_states: The number of states in the lattice</span>
+<span class="sd">        :type num_states: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">t_current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">temps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">average_energy</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">average_magnetization</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">heat_cap</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">mag_sus</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">tmin</span><span class="p">),</span><span class="nb">int</span><span class="p">((</span><span class="n">tmax</span><span class="o">-</span><span class="n">tmin</span><span class="p">)</span><span class="o">/</span><span class="n">step</span><span class="p">)):</span>
+            <span class="n">temps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmin</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">constants</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">tmin</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="n">num_states</span><span class="p">)</span>
+            <span class="n">average_energy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avg_eng</span><span class="p">)</span>
+            <span class="n">average_magnetization</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avg_mag</span><span class="p">)</span>
+            <span class="n">heat_cap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity</span><span class="p">)</span>
+            <span class="n">mag_sus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mag_sus</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temps</span><span class="p">,</span><span class="n">average_energy</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span><span class="n">temps</span><span class="p">,</span><span class="n">average_magnetization</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span><span class="n">temps</span><span class="p">,</span><span class="n">heat_cap</span><span class="p">,</span><span class="s1">&#39;g-&#39;</span><span class="p">,</span><span class="n">temps</span><span class="p">,</span><span class="n">mag_sus</span><span class="p">,</span><span class="s1">&#39;y-&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Average Energy&quot;</span><span class="p">,</span> <span class="s2">&quot;Average Magnetization&quot;</span><span class="p">,</span> <span class="s2">&quot;Heat Capacity&quot;</span><span class="p">,</span> <span class="s2">&quot;Magnetic Susceptibility&quot;</span><span class="p">],</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature (K)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">t_current</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Do something if this file is invoked on its own</span>
+    <span class="n">generator</span> <span class="o">=</span> <span class="n">spin_lattice_1D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Nishad Manohar. Project structure based on the Computational Molecular Science Python Cookiecutter version 1.6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
