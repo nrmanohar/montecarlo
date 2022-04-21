@@ -2,7 +2,6 @@
 
 # Add imports here
 from .hamiltonian import *
-from .metropolis import *
 
 # Handle versioneer
 from ._version import get_versions
