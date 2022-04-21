@@ -353,6 +353,7 @@ class spin_config_1D:
         plt.show()
         self.T = t_current
         
+        
 if __name__ == "__main__":
     # Do something if this file is invoked on its own
     generator = spin_lattice_1D(n=2)

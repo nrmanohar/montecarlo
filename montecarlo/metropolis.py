@@ -1,6 +1,3 @@
-import random
-from  .hamiltonian import *
-
 def spin_energy(list, J = -2, mu = 1.1, k = 1):
         energy = 0
         for i in range(len(list)-1):
