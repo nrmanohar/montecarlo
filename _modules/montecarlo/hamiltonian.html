@@ -98,6 +98,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">J</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spin_energy</span><span class="p">()</span>
 <div class="viewcode-block" id="Hamiltonian.initialize"><a class="viewcode-back" href="../../api.html#montecarlo.Hamiltonian.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initializes itself using a list. Note, all lists should be in the format of a sequential list where 1 is spin up and -1 is spin down</span>
 
@@ -246,7 +248,7 @@
 <span class="sd">        </span>
 <span class="sd">        :param k: The k value do you want to set your state at</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">boltz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
 <div class="viewcode-block" id="spin_config_1D.mu"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.mu">[docs]</a>    <span class="k">def</span> <span class="nf">mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Modifies the magnetic preference alone</span>
@@ -420,25 +422,22 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Average Energy&quot;</span><span class="p">,</span> <span class="s2">&quot;Average Magnetization&quot;</span><span class="p">,</span> <span class="s2">&quot;Heat Capacity&quot;</span><span class="p">,</span> <span class="s2">&quot;Magnetic Susceptibility&quot;</span><span class="p">],</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature (K)&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">t_current</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ASDDIOJOIJEF&#39;</span><span class="p">)</span></div></div>
-<span class="k">def</span> <span class="nf">spin_energy</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">J</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">t_current</span></div></div>
+
+<span class="k">def</span> <span class="nf">spin_energy</span><span class="p">(</span><span class="n">J</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
         <span class="n">energy</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">energy</span><span class="o">+=</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="nb">list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">energy</span><span class="o">+=</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">energy</span><span class="o">+=</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">state</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">energy</span><span class="o">*=</span> <span class="o">-</span><span class="n">J</span><span class="o">/</span><span class="n">k</span>
     
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
             <span class="n">energy</span><span class="o">+=</span><span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>    
-        <span class="k">return</span> <span class="n">energy</span>
-    
-
-        
+        <span class="k">return</span> <span class="n">energy</span>        
         
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="c1"># Do something if this file is invoked on its own</span>
-    <span class="n">generator</span> <span class="o">=</span> <span class="n">spin_lattice_1D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">generator</span> <span class="o">=</span> <span class="n">spin_config_1D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span>
 </pre></div>
 
