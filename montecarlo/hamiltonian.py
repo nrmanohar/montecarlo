@@ -29,6 +29,8 @@ class Hamiltonian:
         self.j = J
         self.mu = mu
         self.k = k
+        self.initialize()
+        self.spin_energy()
     def initialize(self,list):
         """Initializes itself using a list. Note, all lists should be in the format of a sequential list where 1 is spin up and -1 is spin down
 
@@ -177,7 +179,7 @@ class spin_config_1D:
         
         :param k: The k value do you want to set your state at
         """
-        self.k = boltz
+        self.k = k
         self.calc(self.size)
     def mu(self,mu):
         """Modifies the magnetic preference alone
@@ -352,22 +354,19 @@ class spin_config_1D:
         plt.xlabel("Temperature (K)")
         plt.show()
         self.T = t_current
-        print('ASDDIOJOIJEF')
-def spin_energy(list, J = -2, mu = 1.1, k = 1):
+
+def spin_energy(J = -2, mu = 1.1, k = 1, state = [1,-1,1,-1]):
         energy = 0
-        for i in range(len(list)-1):
-            energy+=(list[i]*list[i+1])
+        for i in range(len(state)-1):
+            energy+=(state[i]*state[i+1])
         energy+=state[0]*state[-1]
         energy*= -J/k
     
-        for j in list:
+        for j in state:
             energy+=(mu*j)    
-        return energy
-    
-
-        
+        return energy        
         
 if __name__ == "__main__":
     # Do something if this file is invoked on its own
-    generator = spin_lattice_1D(n=2)
+    generator = spin_config_1D(n=2)
     print(generator)
