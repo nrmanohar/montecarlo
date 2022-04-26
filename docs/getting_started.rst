@@ -30,9 +30,9 @@ Here's a sample code with the montecarlo package
 
 .. code-block:: python
 
-    import montecarlo
+    from montecarlo import *
 
-    lattice = montecarlo.spin_config_1D(n=2,temp=1)
+    lattice = spin_config_1D(n=2,temp=1)
     print(lattice)
     lattice.generate_plot(num_states=8)
 

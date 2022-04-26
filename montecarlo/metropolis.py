@@ -26,7 +26,7 @@ def sweep(state, mu=1.1, k=1, J=-2, T=1):
         if energy_two < energies[0]:
             energies.append(energy_two)
         else:
-            prob = math.exp(energy_two/(k*T))
+            prob = math.exp(-energy_two/(k*T))
             if prob>random.random():
                 energies.append(energy_two)
         sweeper = state.copy()
