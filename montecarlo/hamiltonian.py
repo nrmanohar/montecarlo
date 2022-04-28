@@ -1,4 +1,4 @@
-"""Provide the primary functions."""
+"""Contains the funcions and classes for specific and exact calculations"""
 import numpy as np
 import matplotlib.pyplot as plt
 plt.clf()
@@ -316,7 +316,7 @@ class spin_config_1D:
             while len(state)<n:
                 state.insert(0,-1)
             self.states.append(state)
-    def generate_plot(self,tmin=1,tmax=10,step=0.1,J = -2, mu = 1.1, k = 1, num_states=8):
+    def generate_plot(self,tmin=1,tmax=10,step=0.1,J = -2, mu = 1.1, k = 1, n=8):
         """
         Generates the plot for average energy, average magnetizatoin, heat capacity, and magnetic susceptibility over various temperatures.
 
@@ -332,8 +332,8 @@ class spin_config_1D:
         :type mu: int or float
         :param k: Boltzmann constant
         :type k: int or float
-        :param num_states: The number of states in the lattice
-        :type num_states: int
+        :param n: The number of states in the lattice
+        :type n: int
         """
         t_current = self.T
         temps = []
@@ -341,10 +341,10 @@ class spin_config_1D:
         average_magnetization=[]
         heat_cap=[]
         mag_sus=[]
-        for i in range(int(tmin),int((tmax-tmin)/step)):
+        for i in range(int((tmax-tmin)/step)):
             temps.append(tmin+i*step)
             self.constants(k,J,mu,tmin+i*step)
-            self.calc(num_states)
+            self.calc(n)
             average_energy.append(self.avg_eng)
             average_magnetization.append(self.avg_mag)
             heat_cap.append(self.heat_capacity)

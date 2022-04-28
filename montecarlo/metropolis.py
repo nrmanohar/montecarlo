@@ -1,3 +1,4 @@
+"""Contains the funcions to complete montecarlo calculations and graphing"""
 from .hamiltonian import *
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,12 +9,34 @@ import random
 import math
 
 def average(list):
+    """Computes the average of any input list, in our case the list of energies
+
+    :param list: Any list (of numbers)
+    :type list: list
+    :return: The arithmetic average of the list
+    :rtype: float or int
+    """
     sum=0
     for i in list:
         sum+=i
     return sum/len(list)
 
 def sweep(state, mu=1.1, k=1, J=-2, T=1):
+    """Computes energies and magnetization of each sweep of a given state and returns a list of them
+
+    :param state: The state to be sweeped
+    :type list: list
+    :param mu: the magnetic constant, defualts to 1.1
+    :type mu: float or int
+    :param k: the boltzmann constant, defaults to 1
+    :type k: float or int
+    :param J: the ferromagnetic constant, defaults to -2
+    :type J: float or int
+    :param T: the temperature your state is in, defaults to 1
+    :type T: float or int
+    :return: A list of lists, the first list is the list of energies, the second of magnetizations
+    :rtype: list
+    """
     energies = []
     mags = []
     states = []
@@ -44,6 +67,23 @@ def sweep(state, mu=1.1, k=1, J=-2, T=1):
     return data
 
 def metropolis_sample(n=8, mu=1.1,k=1,J=-2,T=1, sweeps=100):
+    """Computes the approximate values of average energy, average magnetization, heat capacity, and magnetic susceptibility of an arbitrary spin lattice of size n using the montecarlo simulation
+
+    :param n: The size of the lattice, defaults to 8
+    :type list: int
+    :param mu: the magnetic constant, defualts to 1.1
+    :type mu: float or int
+    :param k: the boltzmann constant, defaults to 1
+    :type k: float or int
+    :param J: the ferromagnetic constant, defaults to -2
+    :type J: float or int
+    :param T: the temperature your state is in, defaults to 1
+    :type T: float or int
+    :param sweeps: The number of sweeps you'll take (more sweeps means more accurate simulation), defaults to 100
+    :type sweeps: int
+    :return: A list, the first item is the average energy, the second is the average magnetization, the third is the heat capacity, the fourth is the magnetic susceptibility
+    :rtype: list
+    """
     total_energies = []
     probabilities = []
     mags = []
@@ -100,15 +140,34 @@ def metropolis_sample(n=8, mu=1.1,k=1,J=-2,T=1, sweeps=100):
 
 
 
-def metro_plot(tmin=1,tmax=10,step=0.1,J = -2, mu = 1.1, k = 1, num_states=8,sweeps=1000):
+def metro_plot(tmin=1,tmax=10,step=0.1,J = -2, mu = 1.1, k = 1, n=8,sweeps=1000):
+    """Plots average energy, average magnetization, heat capacity, and magnetic susceptibility with respect to varying temepratures using montecarlo simulations
+
+    :param tmin: The lower temperature bound, defaults to 1
+    :type tmin: float
+    :param tmax: The upper temperature bound, defaults to 10
+    :type tmax: float
+    :param step: The number of increments between tmin and tmax
+    :type step: float
+    :param J: the ferromagnetic constant, defaults to -2
+    :type J: float or int
+    :param mu: the magnetic constant, defualts to 1.1
+    :type mu: float or int
+    :param k: the boltzmann constant, defaults to 1
+    :type k: float or int
+    :param n: the size of the spin lattice
+    :type n: int
+    :param sweeps: The number of sweeps you'll take (more sweeps means more accurate simulation), defaults to 100
+    :type sweeps: int
+    """
     temps = []
     average_energy = []
     average_magnetization = []
     heat_cap = []
     mag_sus = []
-    for i in range(int(tmin),int((tmax-tmin)/step)):
+    for i in range(int((tmax-tmin)/step)):
         temps.append(tmin+i*step)
-        data = metropolis_sample(num_states,mu,k,J,temps[-1],sweeps)
+        data = metropolis_sample(n,mu,k,J,temps[-1],sweeps)
         average_energy.append(data[0])
         average_magnetization.append(data[1])
         heat_cap.append(data[2])
