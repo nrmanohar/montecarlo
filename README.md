@@ -8,6 +8,11 @@ montecarlo
 
 A python package to work with classical spin lattices
 
+Requirements
+- Python 3.7 or superior
+- NumPy
+- Matplotlib
+
 ### Copyright
 
 Copyright (c) 2022, Nishad Manohar
