@@ -356,7 +356,7 @@ class spin_config_1D:
         self.T = t_current
 
 def spin_energy(J = -2, mu = 1.1, k = 1, state = [1,-1,1,-1]):
-        """Computes the magnetization alone of some spin configuration. Note, all lists should be in the format of a sequential list where 1 is spin up and -1 is spin down
+        """Computes the energy of some spin configuration. Note, all lists should be in the format of a sequential list where 1 is spin up and -1 is spin down
 
         :param J: Ferromagnetic constant, defaults to -2
         :type J: int or float
