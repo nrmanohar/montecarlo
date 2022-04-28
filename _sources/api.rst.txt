@@ -14,4 +14,6 @@ API Documentation
 .. autofunction:: magnetization
 
 .. autoclass:: spin_config_1D
-   :members: 
+   :members:
+
+.. autofunction:: spin_energy 
