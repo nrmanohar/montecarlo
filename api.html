@@ -42,6 +42,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="autosummary/montecarlo.hamiltonian.html">montecarlo.hamiltonian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autosummary/montecarlo.metropolis.html">montecarlo.metropolis</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About this package</a></li>
@@ -80,7 +81,10 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="autosummary/montecarlo.hamiltonian.html#module-montecarlo.hamiltonian" title="montecarlo.hamiltonian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">montecarlo.hamiltonian</span></code></a></p></td>
-<td><p>Provide the primary functions.</p></td>
+<td><p>Contains the funcions and classes for specific and exact calculations</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="autosummary/montecarlo.metropolis.html#module-montecarlo.metropolis" title="montecarlo.metropolis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">montecarlo.metropolis</span></code></a></p></td>
+<td><p>Contains the funcions to complete montecarlo calculations and graphing</p></td>
 </tr>
 </tbody>
 </table>
@@ -235,7 +239,7 @@
 
 <dl class="method">
 <dt id="montecarlo.spin_config_1D.generate_plot">
-<code class="sig-name descname">generate_plot</code><span class="sig-paren">(</span><em class="sig-param">tmin=1</em>, <em class="sig-param">tmax=10</em>, <em class="sig-param">step=0.1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">num_states=8</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.generate_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.generate_plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">generate_plot</code><span class="sig-paren">(</span><em class="sig-param">tmin=1</em>, <em class="sig-param">tmax=10</em>, <em class="sig-param">step=0.1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">n=8</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.generate_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.generate_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates the plot for average energy, average magnetizatoin, heat capacity, and magnetic susceptibility over various temperatures.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -246,7 +250,7 @@
 <li><p><strong>J</strong> (<em>int</em><em> or </em><em>float</em>) – Ferromagnetic constant, defaults to -2</p></li>
 <li><p><strong>mu</strong> (<em>int</em><em> or </em><em>float</em>) – Magnetization constant, defaults to 1.1</p></li>
 <li><p><strong>k</strong> (<em>int</em><em> or </em><em>float</em>) – Boltzmann constant</p></li>
-<li><p><strong>num_states</strong> (<em>int</em>) – The number of states in the lattice</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – The number of states in the lattice</p></li>
 </ul>
 </dd>
 </dl>
@@ -335,6 +339,90 @@
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="montecarlo.average">
+<code class="sig-prename descclassname">montecarlo.</code><code class="sig-name descname">average</code><span class="sig-paren">(</span><em class="sig-param">list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/metropolis.html#average"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.average" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the average of any input list, in our case the list of energies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>list</strong> (<em>list</em>) – Any list (of numbers)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The arithmetic average of the list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float or int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="montecarlo.sweep">
+<code class="sig-prename descclassname">montecarlo.</code><code class="sig-name descname">sweep</code><span class="sig-paren">(</span><em class="sig-param">state</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">T=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/metropolis.html#sweep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.sweep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes energies and magnetization of each sweep of a given state and returns a list of them</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – The state to be sweeped</p></li>
+<li><p><strong>mu</strong> (<em>float</em><em> or </em><em>int</em>) – the magnetic constant, defualts to 1.1</p></li>
+<li><p><strong>k</strong> (<em>float</em><em> or </em><em>int</em>) – the boltzmann constant, defaults to 1</p></li>
+<li><p><strong>J</strong> (<em>float</em><em> or </em><em>int</em>) – the ferromagnetic constant, defaults to -2</p></li>
+<li><p><strong>T</strong> (<em>float</em><em> or </em><em>int</em>) – the temperature your state is in, defaults to 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of lists, the first list is the list of energies, the second of magnetizations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="montecarlo.metropolis_sample">
+<code class="sig-prename descclassname">montecarlo.</code><code class="sig-name descname">metropolis_sample</code><span class="sig-paren">(</span><em class="sig-param">n=8</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">T=1</em>, <em class="sig-param">sweeps=100</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/metropolis.html#metropolis_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.metropolis_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the approximate values of average energy, average magnetization, heat capacity, and magnetic susceptibility of an arbitrary spin lattice of size n using the montecarlo simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – The size of the lattice, defaults to 8</p></li>
+<li><p><strong>mu</strong> (<em>float</em><em> or </em><em>int</em>) – the magnetic constant, defualts to 1.1</p></li>
+<li><p><strong>k</strong> (<em>float</em><em> or </em><em>int</em>) – the boltzmann constant, defaults to 1</p></li>
+<li><p><strong>J</strong> (<em>float</em><em> or </em><em>int</em>) – the ferromagnetic constant, defaults to -2</p></li>
+<li><p><strong>T</strong> (<em>float</em><em> or </em><em>int</em>) – the temperature your state is in, defaults to 1</p></li>
+<li><p><strong>sweeps</strong> (<em>int</em>) – The number of sweeps you’ll take (more sweeps means more accurate simulation), defaults to 100</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list, the first item is the average energy, the second is the average magnetization, the third is the heat capacity, the fourth is the magnetic susceptibility</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="montecarlo.metro_plot">
+<code class="sig-prename descclassname">montecarlo.</code><code class="sig-name descname">metro_plot</code><span class="sig-paren">(</span><em class="sig-param">tmin=1</em>, <em class="sig-param">tmax=10</em>, <em class="sig-param">step=0.1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">n=8</em>, <em class="sig-param">sweeps=1000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/metropolis.html#metro_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.metro_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots average energy, average magnetization, heat capacity, and magnetic susceptibility with respect to varying temepratures using montecarlo simulations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tmin</strong> (<em>float</em>) – The lower temperature bound, defaults to 1</p></li>
+<li><p><strong>tmax</strong> (<em>float</em>) – The upper temperature bound, defaults to 10</p></li>
+<li><p><strong>step</strong> (<em>float</em>) – The number of increments between tmin and tmax</p></li>
+<li><p><strong>J</strong> (<em>float</em><em> or </em><em>int</em>) – the ferromagnetic constant, defaults to -2</p></li>
+<li><p><strong>mu</strong> (<em>float</em><em> or </em><em>int</em>) – the magnetic constant, defualts to 1.1</p></li>
+<li><p><strong>k</strong> (<em>float</em><em> or </em><em>int</em>) – the boltzmann constant, defaults to 1</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – the size of the spin lattice</p></li>
+<li><p><strong>sweeps</strong> (<em>int</em>) – The number of sweeps you’ll take (more sweeps means more accurate simulation), defaults to 100</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

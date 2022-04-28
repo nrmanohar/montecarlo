@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>montecarlo.hamiltonian &mdash; montecarlo  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>montecarlo.metropolis &mdash; montecarlo  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -18,8 +18,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="montecarlo.metropolis" href="montecarlo.metropolis.html" />
-    <link rel="prev" title="API Documentation" href="../api.html" /> 
+    <link rel="next" title="About this package" href="../about.html" />
+    <link rel="prev" title="montecarlo.hamiltonian" href="montecarlo.hamiltonian.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,8 +41,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">montecarlo.hamiltonian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="montecarlo.metropolis.html">montecarlo.metropolis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="montecarlo.hamiltonian.html">montecarlo.hamiltonian</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">montecarlo.metropolis</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About this package</a></li>
@@ -63,9 +63,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../api.html">API Documentation</a> &raquo;</li>
-      <li>montecarlo.hamiltonian</li>
+      <li>montecarlo.metropolis</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/autosummary/montecarlo.hamiltonian.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/autosummary/montecarlo.metropolis.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -73,9 +73,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-montecarlo.hamiltonian">
-<span id="montecarlo-hamiltonian"></span><h1>montecarlo.hamiltonian<a class="headerlink" href="#module-montecarlo.hamiltonian" title="Permalink to this headline">¶</a></h1>
-<p>Contains the funcions and classes for specific and exact calculations</p>
+  <div class="section" id="module-montecarlo.metropolis">
+<span id="montecarlo-metropolis"></span><h1>montecarlo.metropolis<a class="headerlink" href="#module-montecarlo.metropolis" title="Permalink to this headline">¶</a></h1>
+<p>Contains the funcions to complete montecarlo calculations and graphing</p>
 <p class="rubric">Functions</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -83,26 +83,17 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnetization</span></code>(spin_config)</p></td>
-<td><p>Computes the magnetization alone of some spin configuration.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">average</span></code>(list)</p></td>
+<td><p>Computes the average of any input list, in our case the list of energies</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spin_energy</span></code>([J, mu, k, state])</p></td>
-<td><p>Computes the energy of some spin configuration.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep</span></code>(state[, mu, k, J, T])</p></td>
+<td><p>Computes energies and magnetization of each sweep of a given state and returns a list of them</p></td>
 </tr>
-</tbody>
-</table>
-<p class="rubric">Classes</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Hamiltonian</span></code>([J, mu, k, state])</p></td>
-<td><p>This is a simple class to calculate the hamiltonian for a spin configuration</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">metropolis_sample</span></code>([n, mu, k, J, T, sweeps])</p></td>
+<td><p>Computes the approximate values of average energy, average magnetization, heat capacity, and magnetic susceptibility of an arbitrary spin lattice of size n using the montecarlo simulation</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spin_config_1D</span></code>([boltz, J, mu, temp, n])</p></td>
-<td><p>This is a simple class to calculate the energy distribution for all configurations of size n</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">metro_plot</span></code>([tmin, tmax, step, J, mu, k, n, …])</p></td>
+<td><p>Plots average energy, average magnetization, heat capacity, and magnetic susceptibility with respect to varying temepratures using montecarlo simulations</p></td>
 </tr>
 </tbody>
 </table>
@@ -112,8 +103,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../api.html" class="btn btn-neutral float-left" title="API Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="montecarlo.metropolis.html" class="btn btn-neutral float-right" title="montecarlo.metropolis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="montecarlo.hamiltonian.html" class="btn btn-neutral float-left" title="montecarlo.hamiltonian" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../about.html" class="btn btn-neutral float-right" title="About this package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

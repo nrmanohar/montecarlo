@@ -14,7 +14,7 @@
    .. autosummary::
    
       magnetization
-   
+      spin_energy   
    
 
    
