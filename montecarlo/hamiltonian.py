@@ -356,6 +356,19 @@ class spin_config_1D:
         self.T = t_current
 
 def spin_energy(J = -2, mu = 1.1, k = 1, state = [1,-1,1,-1]):
+        """Computes the magnetization alone of some spin configuration. Note, all lists should be in the format of a sequential list where 1 is spin up and -1 is spin down
+
+        :param J: Ferromagnetic constant, defaults to -2
+        :type J: int or float
+        :param mu: Magnetic constant, defaults to 1.1
+        :type mu: int or float
+        :param k: The boltzmann constant, defaults to 1
+        :type k: int or float
+        :param state: the list of states in the lattice: defaults to [1,-1,1,-1]
+        :type state: list
+        :return: The computed energy for a spin configuration of listed spin states
+        :rtype: float
+        """
         energy = 0
         for i in range(len(state)-1):
             energy+=(state[i]*state[i+1])

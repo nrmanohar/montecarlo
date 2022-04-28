@@ -6,7 +6,7 @@ montecarlo
 [![codecov](https://codecov.io/gh/nrmanohar/montecarlo/branch/master/graph/badge.svg)](https://codecov.io/gh/nrmanohar/montecarlo/branch/master)
 
 
-A python package to work with classical spin lattices
+A python package to work with classical spin lattices. This package is capable of doing both exact calculations for smaller lattices, and then montecarlo simulation approximations for larger lattices.
 
 Requirements
 - Python 3.7 or superior
