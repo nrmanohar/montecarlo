@@ -125,11 +125,11 @@ def metropolis_sample(n=8, mu=1.1,k=1,J=-2,T=1, sweeps=100):
     
     square_mag = mags.copy()
     for i in range(len(square_mag)):
-        square_eng[i]=(square_mag[i]*square_mag[i])
+        square_mag[i]=(square_mag[i]*square_mag[i])
     avg_square_mag =0
     for i in range(len(square_mag)):
         avg_square_mag+=(square_mag[i]*probabilities[i])
-    mag_sus = -(avg_square_mag - (avg_mag**2))/(k*T)
+    mag_sus = (avg_square_mag - (avg_mag**2))/(k*T)
     
     data = []
     data.append(avg_eng)
