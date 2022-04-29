@@ -239,12 +239,12 @@
 
 <dl class="method">
 <dt id="montecarlo.spin_config_1D.generate_plot">
-<code class="sig-name descname">generate_plot</code><span class="sig-paren">(</span><em class="sig-param">tmin=1</em>, <em class="sig-param">tmax=10</em>, <em class="sig-param">step=0.1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">n=8</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.generate_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.generate_plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">generate_plot</code><span class="sig-paren">(</span><em class="sig-param">tmin=0.1</em>, <em class="sig-param">tmax=10</em>, <em class="sig-param">step=0.1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">n=8</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.generate_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.generate_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates the plot for average energy, average magnetizatoin, heat capacity, and magnetic susceptibility over various temperatures.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tmin</strong> (<em>float</em>) – minimum temperature, defaults to 1K</p></li>
+<li><p><strong>tmin</strong> (<em>float</em>) – minimum temperature, defaults to .s1K</p></li>
 <li><p><strong>tmax</strong> (<em>float</em>) – max temperature, defaults to 10K</p></li>
 <li><p><strong>step</strong> (<em>float</em>) – Every interval over which a datapoint is measured, defaults to a step of 0.1</p></li>
 <li><p><strong>J</strong> (<em>int</em><em> or </em><em>float</em>) – Ferromagnetic constant, defaults to -2</p></li>
@@ -409,13 +409,13 @@
 
 <dl class="function">
 <dt id="montecarlo.metro_plot">
-<code class="sig-prename descclassname">montecarlo.</code><code class="sig-name descname">metro_plot</code><span class="sig-paren">(</span><em class="sig-param">tmin=1</em>, <em class="sig-param">tmax=10</em>, <em class="sig-param">step=0.1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">n=8</em>, <em class="sig-param">sweeps=1000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/metropolis.html#metro_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.metro_plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">montecarlo.</code><code class="sig-name descname">metro_plot</code><span class="sig-paren">(</span><em class="sig-param">tmin=0.1</em>, <em class="sig-param">tmax=10</em>, <em class="sig-param">step=0.1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">n=8</em>, <em class="sig-param">sweeps=1000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/metropolis.html#metro_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.metro_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots average energy, average magnetization, heat capacity, and magnetic susceptibility with respect to varying temepratures using montecarlo simulations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tmin</strong> (<em>float</em>) – The lower temperature bound, defaults to 1</p></li>
-<li><p><strong>tmax</strong> (<em>float</em>) – The upper temperature bound, defaults to 10</p></li>
+<li><p><strong>tmin</strong> (<em>float</em>) – The lower temperature bound, defaults to .1K</p></li>
+<li><p><strong>tmax</strong> (<em>float</em>) – The upper temperature bound, defaults to 10K</p></li>
 <li><p><strong>step</strong> (<em>float</em>) – The number of increments between tmin and tmax</p></li>
 <li><p><strong>J</strong> (<em>float</em><em> or </em><em>int</em>) – the ferromagnetic constant, defaults to -2</p></li>
 <li><p><strong>mu</strong> (<em>float</em><em> or </em><em>int</em>) – the magnetic constant, defualts to 1.1</p></li>

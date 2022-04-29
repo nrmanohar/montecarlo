@@ -2,12 +2,6 @@
 ======================
 
 .. automodule:: montecarlo.hamiltonian
-
-   
-   
-   
-
-   
    
    .. rubric:: Functions
 
