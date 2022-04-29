@@ -140,12 +140,12 @@ def metropolis_sample(n=8, mu=1.1,k=1,J=-2,T=1, sweeps=100):
 
 
 
-def metro_plot(tmin=1,tmax=10,step=0.1,J = -2, mu = 1.1, k = 1, n=8,sweeps=1000):
+def metro_plot(tmin=.1,tmax=10,step=0.1,J = -2, mu = 1.1, k = 1, n=8,sweeps=1000):
     """Plots average energy, average magnetization, heat capacity, and magnetic susceptibility with respect to varying temepratures using montecarlo simulations
 
-    :param tmin: The lower temperature bound, defaults to 1
+    :param tmin: The lower temperature bound, defaults to .1K
     :type tmin: float
-    :param tmax: The upper temperature bound, defaults to 10
+    :param tmax: The upper temperature bound, defaults to 10K
     :type tmax: float
     :param step: The number of increments between tmin and tmax
     :type step: float

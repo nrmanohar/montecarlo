@@ -22,9 +22,14 @@ Background
     \frac{H}{k} = -\frac{J}{k}\sum s_i s_{i+1}+\frac{\mu}{k}\sum s_i
 
 
-This is the equation of the 1D spin lattice hamiltonian. This can be used to compute the energy levels of a spin lattice structure, and by extension the probability of it occuring using the Boltzmann distribution
+This is the equation of the 1D spin lattice hamiltonian. This can be used to compute the energy levels of a spin lattice structure, and by extension the probability of it occuring using the Boltzmann distribution. However, these structures may have more important charactaristics, like magnetization. Using that, we can compute the average energy and average magnetization of all states of a certain size, and from there determine the heat capacity and magnetic susceptibility. Magnetization can be written as such
 
-Package
+.. math::
+    M = \sum s_i
+
+And the heat capacity can be calculated using expectation values of energy, and magnetic susceptibility using expectation values of magnetization. This package can calculates both values exactly, as well as approximate it using the montecarlo metropolis method.
+
+Examples
 ------------
 Here's a sample code with the montecarlo package
 
@@ -34,12 +39,12 @@ Here's a sample code with the montecarlo package
 
     lattice = spin_config_1D(n=2,temp=1)
     print(lattice)
-    lattice.generate_plot(num_states=8)
+    lattice.generate_plot()
 
 which generates the output
 
-.. code-block::
-    
+::
+
     States: [[-1, -1], [-1, 1], [1, -1], [1, 1]]
     Energies: [1.7999999999999998, -3.9999999999999996, -4.0, 6.199999999999999]
     Magnetizations: [-2, 0, 0, 2]
@@ -54,7 +59,34 @@ which generates the output
 	    mu is: 1.1
 	    Temperature is: 1
 
+
 .. image:: Plot1.jpg
   :width: 400
   :alt: Ising plot
-	
+
+However, we can also simulate a simular plot using the metropolis sampling. The default metro_plot() function generates a plot similar to the default generate_plot() method. Continuing from the previous code block
+
+.. code-block:: python
+
+    metro_plot()
+
+generates an output similar to	
+
+.. image:: Plot2.jpg
+  :width: 400
+  :alt: Metro plot
+
+(note, the outputs won't be exactly the same)
+As you can see, this is an approximation. We can make this approximation better by increasing the number of sweeps we include.
+
+.. code-block:: python
+
+    metro_plot(sweeps = 10000)
+
+generates the output
+
+.. image:: Plot3.jpg
+  :width: 400
+  :alt: Metro plot 2
+
+note how the output is smoother. More sweeps allows you to be more accurate with your plots, at a cost of a higher computation time.

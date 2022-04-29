@@ -316,11 +316,11 @@ class spin_config_1D:
             while len(state)<n:
                 state.insert(0,-1)
             self.states.append(state)
-    def generate_plot(self,tmin=1,tmax=10,step=0.1,J = -2, mu = 1.1, k = 1, n=8):
+    def generate_plot(self,tmin=.1,tmax=10,step=0.1,J = -2, mu = 1.1, k = 1, n=8):
         """
         Generates the plot for average energy, average magnetizatoin, heat capacity, and magnetic susceptibility over various temperatures.
 
-        :param tmin: minimum temperature, defaults to 1K
+        :param tmin: minimum temperature, defaults to .s1K
         :type tmin: float
         :param tmax: max temperature, defaults to 10K
         :type tmax: float
