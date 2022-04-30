@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Documentation &mdash; montecarlo  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Files &mdash; montecarlo  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -40,11 +40,12 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Files</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="autosummary/montecarlo.hamiltonian.html">montecarlo.hamiltonian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autosummary/montecarlo.metropolis.html">montecarlo.metropolis</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="#api-documentation">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About this package</a></li>
 </ul>
 
@@ -62,7 +63,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>API Documentation</li>
+      <li>Files</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -72,8 +73,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="api-documentation">
-<h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="files">
+<h1>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h1>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -88,6 +89,9 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="api-documentation">
+<h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="montecarlo.Hamiltonian">
 <em class="property">class </em><code class="sig-prename descclassname">montecarlo.</code><code class="sig-name descname">Hamiltonian</code><span class="sig-paren">(</span><em class="sig-param">J=-2, mu=1.1, k=1, state=[1, -1, 1, -1]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#Hamiltonian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.Hamiltonian" title="Permalink to this definition">¶</a></dt>
@@ -130,23 +134,6 @@
 </dl>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="function">
-<dt id="montecarlo.magnetization">
-<code class="sig-prename descclassname">montecarlo.</code><code class="sig-name descname">magnetization</code><span class="sig-paren">(</span><em class="sig-param">spin_config</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#magnetization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.magnetization" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the magnetization alone of some spin configuration. Note, all lists should be in the format of a sequential list where 1 is spin up and -1 is spin down</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>spin_config</strong> – A list of spin orientations</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The computed magnetization for a spin configuration of listed spin states</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="class">
@@ -319,6 +306,23 @@
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="function">
+<dt id="montecarlo.magnetization">
+<code class="sig-prename descclassname">montecarlo.</code><code class="sig-name descname">magnetization</code><span class="sig-paren">(</span><em class="sig-param">spin_config</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#magnetization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.magnetization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the magnetization alone of some spin configuration. Note, all lists should be in the format of a sequential list where 1 is spin up and -1 is spin down</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>spin_config</strong> – A list of spin orientations</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The computed magnetization for a spin configuration of listed spin states</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">

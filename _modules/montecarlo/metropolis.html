@@ -38,7 +38,8 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html#api-documentation">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../about.html">About this package</a></li>
 </ul>
 
@@ -111,6 +112,7 @@
     <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spin_energy</span><span class="p">(</span><span class="n">J</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">state</span><span class="p">))</span>
+    <span class="n">compare_energy</span> <span class="o">=</span> <span class="n">energies</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">sweeper</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sweeper</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">sweeper</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="p">:</span>
@@ -119,7 +121,7 @@
             <span class="n">sweeper</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span>
         <span class="n">energy_two</span> <span class="o">=</span> <span class="n">spin_energy</span><span class="p">(</span><span class="n">J</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">sweeper</span><span class="p">)</span>
         <span class="n">avg_eng</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">energy_two</span> <span class="o">&lt;</span> <span class="n">energies</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">energy_two</span> <span class="o">&lt;</span> <span class="n">compare_energy</span><span class="p">:</span>
             <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">energy_two</span><span class="p">)</span>
             <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sweeper</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -127,6 +129,7 @@
             <span class="k">if</span> <span class="n">prob</span> <span class="o">&gt;</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">():</span>
                 <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">energy_two</span><span class="p">)</span>
                 <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sweeper</span><span class="p">)</span>
+                <span class="n">compare_energy</span> <span class="o">=</span> <span class="n">energy_two</span>
         <span class="n">sweeper</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
         <span class="n">mags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">magnetization</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>

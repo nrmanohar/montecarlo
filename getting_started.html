@@ -18,7 +18,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Documentation" href="api.html" />
+    <link rel="next" title="Files" href="api.html" />
     <link rel="prev" title="Welcome to montecarlo’s documentation!" href="index.html" /> 
 </head>
 
@@ -41,11 +41,16 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#theory">Theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#background-and-physics">Background and Physics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#montecarlo-and-metropolis">Montecarlo and Metropolis</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#api-documentation">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About this package</a></li>
 </ul>
 
@@ -85,18 +90,66 @@
 <li><p>Matplotlib</p></li>
 </ul>
 <p>Once you have these packages installed, you can install montecarlo in the same environment using</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">nrmanohar</span><span class="o">/</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">montecarlo</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="theory">
+<h2>Theory<a class="headerlink" href="#theory" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="background-and-physics">
+<h3>Background and Physics<a class="headerlink" href="#background-and-physics" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[\frac{H}{k} = -\frac{J}{k}\sum s_i s_{i+1}+\frac{\mu}{k}\sum s_i\]</div>
-<p>This is the equation of the 1D spin lattice hamiltonian. This can be used to compute the energy levels of a spin lattice structure, and by extension the probability of it occuring using the Boltzmann distribution. However, these structures may have more important charactaristics, like magnetization. Using that, we can compute the average energy and average magnetization of all states of a certain size, and from there determine the heat capacity and magnetic susceptibility. Magnetization can be written as such</p>
+<p>This is the equation of the 1D spin lattice hamiltonian, where s is the spin of each state
+on the lattice state. This can be used to compute the energy levels of a spin lattice structure,
+and by extension the probability of it occuring using the Boltzmann distribution. However, these
+structures have other important charactaristics, like magnetization. Using that, we can compute
+the average energy and average magnetization of all states of a certain size, and from there
+determine the heat capacity and magnetic susceptibility. Magnetization can be written as such</p>
 <div class="math notranslate nohighlight">
 \[M = \sum s_i\]</div>
-<p>And the heat capacity can be calculated using expectation values of energy, and magnetic susceptibility using expectation values of magnetization. This package can calculates both values exactly, as well as approximate it using the montecarlo metropolis method.</p>
+<p>And the relative probability can be written as the following</p>
+<div class="math notranslate nohighlight">
+\[P(\alpha) = e^{-E(\alpha)/{kT}}\]</div>
+<p>However, this is unnormalized, and thus will give incorrect values. For discrete energies, the normalization factor is</p>
+<div class="math notranslate nohighlight">
+\[Z = \sum e^{-E(\alpha)/{kT}}\]</div>
+<p>Similarly, for a continuous energy distribution, the normalization factor is</p>
+<div class="math notranslate nohighlight">
+\[Z = \int e^{-E(\alpha)/{kT}}\]</div>
+<p>Which makes the actual probability of each state</p>
+<div class="math notranslate nohighlight">
+\[P(\alpha) = \frac{1}{Z} e^{-E(\alpha)/{kT}}\]</div>
+<p>The heat capacity can be calculated using expectation values of energy as follows.</p>
+<div class="math notranslate nohighlight">
+\[C = \frac{\langle E^2 \rangle - \langle E \rangle^2}{kT^2}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\langle E\rangle = \sum P(\alpha)E(\alpha)\]</div>
+<p>Magnetic susceptibility can be calculated as follows, in a very similar manner to heat capacity</p>
+<div class="math notranslate nohighlight">
+\[\chi =\frac{\langle M^2 \rangle - \langle M \rangle^2}{kT}\]</div>
+<p>This package can calculate all these values exactly, using the formulas listed above.</p>
+</div>
+<div class="section" id="montecarlo-and-metropolis">
+<h3>Montecarlo and Metropolis<a class="headerlink" href="#montecarlo-and-metropolis" title="Permalink to this headline">¶</a></h3>
+<p>However, calculating these values precisely is computationaly taxing, so we can approximate
+using the montecarlo method. Essentially, the goal is to use a random lattice to approximate
+the total energy distribution. However, this doesn’t include probabilities, and so it wouldn’t
+generate a good plot. The key was the phase transition probability.</p>
+<div class="math notranslate nohighlight">
+\[W(\alpha\rightarrow \beta) = e^{-(E(\beta)-E(\alpha))/kT}\]</div>
+<p>The key is when to keep a state and it’s associated energy, and when not to, and when to
+use that energy to compare other energies. The tester lattice is a random lattice. Then it’ll
+sweep through each lattice site and flip it’s spin and calculate it’s energy. If the energy is
+lower than the energy of the comparison, it’s more probable, and so the state will be kept. If
+the state has a higher energy, we use the comparison used above, which will generate a number
+between zero and one, and then compare it to a random number between zero and one. If the probabilty
+of the phase change is higher than the generated random number, then we keep that state and use that
+state as the reference energy to compare to.</p>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -125,19 +178,19 @@
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/Plot1.jpg"><img alt="Ising plot" src="_images/Plot1.jpg" style="width: 400px;" /></a>
-<p>However, we can also simulate a simular plot using the metropolis sampling. The default metro_plot() function generates a plot similar to the default generate_plot() method. Continuing from the previous code block</p>
+<p>However, we can also simulate a simular plot using the metropolis sampling. The default metro_plot() function generates a plot similar to the default generate_plot() method. Continuing from the previous code block
+(note, the outputs won’t be exactly the same)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metro_plot</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>generates an output similar to</p>
 <a class="reference internal image-reference" href="_images/Plot2.jpg"><img alt="Metro plot" src="_images/Plot2.jpg" style="width: 400px;" /></a>
-<p>(note, the outputs won’t be exactly the same)
-As you can see, this is an approximation. We can make this approximation better by increasing the number of sweeps we include.</p>
+<p>As you can see, this is an approximation. We can make this approximation better by increasing the number of sweeps we include.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metro_plot</span><span class="p">(</span><span class="n">sweeps</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>generates the output</p>
-<a class="reference internal image-reference" href="_images/Plot3.jpg"><img alt="Metro plot 2" src="_images/Plot3.jpg" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/Plot3.jpeg"><img alt="Metro plot 2" src="_images/Plot3.jpeg" style="width: 400px;" /></a>
 <p>note how the output is smoother. More sweeps allows you to be more accurate with your plots, at a cost of a higher computation time.</p>
 </div>
 </div>
@@ -147,7 +200,7 @@ As you can see, this is an approximation. We can make this approximation better 
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Welcome to montecarlo’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="api.html" class="btn btn-neutral float-right" title="Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
