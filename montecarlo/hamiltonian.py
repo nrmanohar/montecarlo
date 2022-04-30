@@ -1,4 +1,4 @@
-"""Contains the funcions and classes for specific and exact calculations"""
+"""Contains the functions and classes for specific and exact calculations"""
 import numpy as np
 import matplotlib.pyplot as plt
 plt.clf()

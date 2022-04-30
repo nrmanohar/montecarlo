@@ -1,4 +1,4 @@
-"""Contains the funcions to complete montecarlo calculations and graphing"""
+"""Contains the functions to complete montecarlo calculations and graphing"""
 from .hamiltonian import *
 import numpy as np
 import matplotlib.pyplot as plt
