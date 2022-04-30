@@ -42,6 +42,7 @@ def sweep(state, mu=1.1, k=1, J=-2, T=1):
     states = []
     states.append(state)
     energies.append(spin_energy(J,mu,k,state))
+    compare_energy = energies[0]
     sweeper = state.copy()
     for i in range(len(sweeper)):
         if sweeper[i]==-1:
@@ -50,7 +51,7 @@ def sweep(state, mu=1.1, k=1, J=-2, T=1):
             sweeper[i]==-1
         energy_two = spin_energy(J,mu,k,sweeper)
         avg_eng = sum(energies)/len(energies)
-        if energy_two < energies[0]:
+        if energy_two < compare_energy:
             energies.append(energy_two)
             states.append(sweeper)
         else:
@@ -58,6 +59,7 @@ def sweep(state, mu=1.1, k=1, J=-2, T=1):
             if prob > random.random():
                 energies.append(energy_two)
                 states.append(sweeper)
+                compare_energy = energy_two
         sweeper = state.copy()
     for i in states:
         mags.append(magnetization(i))

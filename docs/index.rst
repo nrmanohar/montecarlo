@@ -7,6 +7,9 @@ Welcome to montecarlo's documentation!
 =========================================================
 montecarlo is a Python package designed to help energy calculations for 1D spin lattices. Start by reading the getting started page!
 
+.. automodule:: montecarlo
+    :members:
+
 .. toctree::
    :maxdepth: 3
    :caption: Contents:

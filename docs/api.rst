@@ -1,5 +1,5 @@
-API Documentation
-=================
+Files
+======
 
 .. autosummary::
    :toctree: autosummary
@@ -7,15 +7,18 @@ API Documentation
    montecarlo.hamiltonian
    montecarlo.metropolis
 
+API Documentation
+=================
+
 .. currentmodule:: montecarlo 
 
 .. autoclass:: Hamiltonian 
    :members:
 
-.. autofunction:: magnetization
-
 .. autoclass:: spin_config_1D
    :members:
+
+.. autofunction:: magnetization
 
 .. autofunction:: spin_energy
 
