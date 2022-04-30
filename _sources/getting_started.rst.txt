@@ -154,4 +154,4 @@ generates the output
   :width: 400
   :alt: Metro plot 2
 
-note how the output is smoother. More sweeps allows you to be more accurate with your plots, at a cost of a higher computation time.
+note how the output is smoother. More sweeps allows you to be more accurate with your plots, at the cost of a higher computation time.
