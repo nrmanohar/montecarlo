@@ -167,7 +167,7 @@ class spin_config_1D:
         """
         self.T = temp
         self.calc(self.size)
-    def J(self,pref):
+    def ferro(self,pref):
         """Modifies the ferromagnetic preference alone
         
         :param pref: The J value do you want to set your state at
@@ -181,12 +181,19 @@ class spin_config_1D:
         """
         self.k = k
         self.calc(self.size)
-    def mu(self,mu):
+    def mag(self,mu):
         """Modifies the magnetic preference alone
         
         :param mu: The mu value do you want to set your state at
         """
         self.mu = mu
+        self.calc(self.size)
+    def num_states(self,size):
+        """Modifies the number of states alone
+        
+        :param size: The number of states in the new lattice
+        """
+        self.size = size
         self.calc(self.size)
     def __repr__(self):
         string = "States: "+str(self.states)+'\n'
