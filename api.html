@@ -152,17 +152,6 @@
 </dd>
 </dl>
 <dl class="method">
-<dt id="montecarlo.spin_config_1D.J">
-<code class="sig-name descname">J</code><span class="sig-paren">(</span><em class="sig-param">pref</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.J" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modifies the ferromagnetic preference alone</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pref</strong> – The J value do you want to set your state at</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="montecarlo.spin_config_1D.averages">
 <code class="sig-name descname">averages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.averages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.averages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes weighted average energy and magnetization using the energy and probabilities list</p>
@@ -225,6 +214,17 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="montecarlo.spin_config_1D.ferro">
+<code class="sig-name descname">ferro</code><span class="sig-paren">(</span><em class="sig-param">pref</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.ferro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.ferro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modifies the ferromagnetic preference alone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pref</strong> – The J value do you want to set your state at</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="montecarlo.spin_config_1D.generate_plot">
 <code class="sig-name descname">generate_plot</code><span class="sig-paren">(</span><em class="sig-param">tmin=0.1</em>, <em class="sig-param">tmax=10</em>, <em class="sig-param">step=0.1</em>, <em class="sig-param">J=-2</em>, <em class="sig-param">mu=1.1</em>, <em class="sig-param">k=1</em>, <em class="sig-param">n=8</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.generate_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.generate_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates the plot for average energy, average magnetizatoin, heat capacity, and magnetic susceptibility over various temperatures.</p>
@@ -261,6 +261,17 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="montecarlo.spin_config_1D.mag">
+<code class="sig-name descname">mag</code><span class="sig-paren">(</span><em class="sig-param">mu</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.mag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.mag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modifies the magnetic preference alone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mu</strong> – The mu value do you want to set your state at</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="montecarlo.spin_config_1D.magnetic_generation">
 <code class="sig-name descname">magnetic_generation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.magnetic_generation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.magnetic_generation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes all states and calculates the magentization and stores it in a list</p>
@@ -273,12 +284,12 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="montecarlo.spin_config_1D.mu">
-<code class="sig-name descname">mu</code><span class="sig-paren">(</span><em class="sig-param">mu</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.mu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.mu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modifies the magnetic preference alone</p>
+<dt id="montecarlo.spin_config_1D.num_states">
+<code class="sig-name descname">num_states</code><span class="sig-paren">(</span><em class="sig-param">size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/montecarlo/hamiltonian.html#spin_config_1D.num_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#montecarlo.spin_config_1D.num_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modifies the number of states alone</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>mu</strong> – The mu value do you want to set your state at</p>
+<dd class="field-odd"><p><strong>size</strong> – The number of states in the new lattice</p>
 </dd>
 </dl>
 </dd></dl>

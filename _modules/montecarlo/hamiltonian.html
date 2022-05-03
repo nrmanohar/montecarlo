@@ -237,7 +237,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">temp</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
-<div class="viewcode-block" id="spin_config_1D.J"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.J">[docs]</a>    <span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pref</span><span class="p">):</span>
+<div class="viewcode-block" id="spin_config_1D.ferro"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.ferro">[docs]</a>    <span class="k">def</span> <span class="nf">ferro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pref</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Modifies the ferromagnetic preference alone</span>
 <span class="sd">        </span>
 <span class="sd">        :param pref: The J value do you want to set your state at</span>
@@ -251,12 +251,19 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
-<div class="viewcode-block" id="spin_config_1D.mu"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.mu">[docs]</a>    <span class="k">def</span> <span class="nf">mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="p">):</span>
+<div class="viewcode-block" id="spin_config_1D.mag"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.mag">[docs]</a>    <span class="k">def</span> <span class="nf">mag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Modifies the magnetic preference alone</span>
 <span class="sd">        </span>
 <span class="sd">        :param mu: The mu value do you want to set your state at</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+<div class="viewcode-block" id="spin_config_1D.num_states"><a class="viewcode-back" href="../../api.html#montecarlo.spin_config_1D.num_states">[docs]</a>    <span class="k">def</span> <span class="nf">num_states</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Modifies the number of states alone</span>
+<span class="sd">        </span>
+<span class="sd">        :param size: The number of states in the new lattice</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;States: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
